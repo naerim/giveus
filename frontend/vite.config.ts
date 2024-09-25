@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tsConfigPath from 'vite-tsconfig-paths'
 import { VitePWA } from 'vite-plugin-pwa'
+import * as path from 'path'
 
 // https://vitejs.dev/config/
 export default (mode: string) => {
@@ -49,6 +50,11 @@ export default (mode: string) => {
         },
       }),
     ],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'), // '@'를 './src'로 매핑
+      },
+    },
     server: {
       port: 3000,
       host: true,

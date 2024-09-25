@@ -33,5 +33,27 @@ module.exports = {
   rules: {
     'jsx-a11y/label-has-associated-control': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
+    'prettier/prettier': 'error',
+    'react/function-component-definition': [
+      'error',
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
+    'react/react-in-jsx-scope': 'off'
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      },
+      alias: {
+        map: [
+          ['@', './src'],
+        ],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'], 
+      },
+    },
   },
 }
