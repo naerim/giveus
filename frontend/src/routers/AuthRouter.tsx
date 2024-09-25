@@ -43,8 +43,14 @@ const AuthRouter = () => {
         <Route path="donor-list" element={<DonorListPage />} />
         <Route path="medical-expense" element={<MedicalExpensePage />} />
       </Route>
-      <Route path="/payment/:payment/donate/success" element={<PaymentRedirectHandler />} />
-      <Route path="/payment/:payment/recharge/success" element={<PaymentRedirectHandler />} />
+      <Route
+        path="/payment/:payment/donate/success"
+        element={<PaymentRedirectHandler />}
+      />
+      <Route
+        path="/payment/:payment/recharge/success"
+        element={<PaymentRedirectHandler />}
+      />
       <Route path="/giveus/:id" element={<SecondRegPage />} />
       <Route path="/giveus/ok" element={<RegOkPage />} />
       <Route path="*" element={<HomePage />} />
