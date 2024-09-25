@@ -19,7 +19,8 @@
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"],
       "@stores/*": ["stores/*"],
-      "@routers/*": ["routers/*"]
+      "@routers/*": ["routers/*"],
+      "@mocks/*": ["mocks/*"]
     },
 
     /* Bundler mode */

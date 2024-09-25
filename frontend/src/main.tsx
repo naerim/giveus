@@ -1,8 +1,10 @@
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
 import { RecoilRoot } from 'recoil'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { HelmetProvider } from 'react-helmet-async'
+import * as process from 'process'
+import { worker } from '@mocks/browser.ts'
+import App from './App.tsx'
 
 // production mode에서 주석 제거
 // if (process.env.NODE_ENV === 'production') {
@@ -24,3 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     </RecoilRoot>
   </HelmetProvider>,
 )
+
+if (process.env.NODE_ENV === 'dev') {
+  worker.start()
+}
