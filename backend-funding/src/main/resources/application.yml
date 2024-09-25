@@ -1,0 +1,75 @@
+spring:
+  application:
+    name: backend-funding
+  profiles:
+    active: dev
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  datasource:
+    hikari:
+      connection-test-query: select 1
+      username: giveus
+      password: giveus2024~!
+  data:
+    redis:
+      host: j10c206.p.ssafy.io
+      port: 6379
+      password: giveus2024~!
+      repositories:
+        enabled: false
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+
+server:
+  port: 8083
+  servlet:
+    #    context-path: /api/v1/funding
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+management:
+  health:
+    refresh:
+      enabled: true
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+
+springdoc:
+  swagger-ui:
+    display-request-duration: true
+    operations-sorter: alpha
+    path: /docs
+    tags-sorter: alpha
+    doc-expansion: none
+  api-docs:
+    path: /api/funding/docs
+
+cloud:
+  aws:
+    s3:
+      bucket: giveus
+    stack:
+      auto: false
+    region:
+      static: ap-southeast-2
+    credentials:
+      accessKey: AKIARUOHM5QA2FAS4XL7
+      secretKey: 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
+

@@ -1,0 +1,72 @@
+pipeline {
+  agent any
+    environment {
+      repository = "gudrb4869/giveus_frontend_admin"  //docker hub id와 repository 이름
+      DOCKERHUB_CREDENTIALS = credentials('dockerhub') // jenkins에 등록해 놓은 docker hub credentials 이름
+      dockerImage = ''
+      REPO = "s10-blockchain-contract-sub2/S10P22C206"
+    }
+    
+  stages {
+
+    stage('Build image') {
+      steps {
+        script {
+          dir('./frontend-admin') {
+            sh 'docker build --no-cache -t $repository .'
+          }
+        }
+      }
+    }
+
+    stage('Login'){
+      steps{
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
+      }
+    }
+
+    stage('Push image') {
+      steps {
+        script {
+          sh 'docker push $repository' //docker push
+        }
+      }
+    }
+
+    stage('Prune old images') {
+      steps {
+        script {
+          sh "docker system prune -af --volumes"
+        }
+      }
+    }
+
+
+    stage('Clean image') {
+      steps {
+        script {
+          try {
+            sh 'docker rmi $repository' // jenkins 컨테이너에 있는 docker image 제거
+          } catch (Exception e) {
+            sh 'echo "fail to remove Docker Image"'
+          }
+        }
+      }
+    }
+
+    stage('Deployment') {
+      steps {
+        script {
+          try {
+            sh 'docker stop giveus_frontend_admin'
+            sh 'docker rm giveus_frontend_admin'
+          } catch (Exception e) {
+            sh 'echo "fail to stop and remove container"'
+          }
+          sh 'docker pull $repository:latest'
+          sh 'docker run --name giveus_frontend_admin -d -p 8091:3001 $repository'
+        }
+      }
+    }
+  }
+}

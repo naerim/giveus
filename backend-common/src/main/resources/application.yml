@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: {서비스명}
+  profiles:
+    active: dev
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  datasource:
+    hikari:
+      connection-test-query: select 1
+      username: giveus
+      password: giveus2024~!
+
+server:
+  port: {포트번호}
+  servlet:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+management:
+  health:
+    refresh:
+      enabled: true
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+
+springdoc:
+  swagger-ui:
+    operations-sorter: alpha
+    path: /docs
+  api-docs:
+    path: /api/v1/{도메인}/docs

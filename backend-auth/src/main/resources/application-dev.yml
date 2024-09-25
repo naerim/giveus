@@ -1,0 +1,43 @@
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://j10c206.p.ssafy.io:3306/dev?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true
+    hikari:
+      username: giveus
+      password: giveus2024~!
+#      connection-timeout: 300000000
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: 84b84bfba356cb44c40c484007117fe2 #
+            client-authentication-method: client_secret_post #
+            authorization-grant-type: authorization_code #
+            scope:
+              - profile_nickname
+              - profile_image
+              - account_email
+            redirect-uri: "http://localhost:8082/login/oauth2/code/kakao" #
+            client-name: Kakao
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize #
+            token-uri: https://kauth.kakao.com/oauth/token #
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+#            user-info-authentication-method: header
+            user-name-attribute: id # Kakao 응답 값 id, connected_at, properties, kakao_account 중 id 지정
+
+redirect:
+  success:
+    http://localhost:3000/login/oauth2
+
+swagger:
+  server: http://localhost:8081

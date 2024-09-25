@@ -1,0 +1,47 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application:
+    name: backend-auth
+  profiles:
+    active: dev
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+    open-in-view: false
+
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+
+jwt:
+  secret: dyAeHubOOc8KaOfYB6XEQoEj1QzRlVgtjNL8PYs1A1tymZvvqkcEU7L1imkKHeDa
+  expiration:
+    access: 3600000 # 1시간
+    refresh: 1296000000 # 2주
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+
+springdoc:
+  swagger-ui:
+    operations-sorter: alpha
+    path: /docs
+  api-docs:
+    path: /api/v1/auth/docs

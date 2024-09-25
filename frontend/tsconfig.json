@@ -8,7 +8,7 @@
     "baseUrl": "./src",
     "types": ["vite/client"], //설정없이 import.meta.env 사용 시 TS error 발생
     "paths": {
-      "@/*": ["./*"],
+      "@/*": ["*"],
       "@apis/*": ["apis/*"],
       "@common/*": ["common/*"],
       "@components/*": ["components/*"],
@@ -19,8 +19,7 @@
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"],
       "@stores/*": ["stores/*"],
-      "@routers/*": ["routers/*"],
-      "@mocks/*": ["mocks/*"]
+      "@routers/*": ["routers/*"]
     },
 
     /* Bundler mode */
@@ -35,8 +34,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true
+    "noFallthroughCasesInSwitch": true
   },
   "include": [".eslintrc.cjs", "src"],
   "references": [{ "path": "./tsconfig.node.json" }]

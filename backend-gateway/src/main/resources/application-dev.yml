@@ -1,0 +1,25 @@
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+swagger:
+  server: http://localhost:8081
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway:
+            handler:
+              org.springframework.cloud.gateway.handler.RoutePredicateHandlerMapping: debug
+            route:
+              org.springframework.cloud.gateway.route.RouteDefinitionLocator: warn
+              org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: warn
+        core:
+          env:
+            org.springframework.core.env.PropertySourcesPropertyResolver: warn
+    root: info

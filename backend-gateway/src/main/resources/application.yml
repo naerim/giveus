@@ -1,0 +1,93 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: backend-gateway
+  profiles:
+    active: dev
+  cloud:
+    gateway:
+      default-filters:
+        - name: GlobalFilter
+          args:
+            preLogger: true
+            postLogger: true
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credential
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - 'http://localhost:3000'
+              - 'http://localhost:3001'
+              - 'https://admin.giveus.site'
+              - 'https://admin.giveus.site:443'
+              - 'https://admin.giveus.site:8090'
+              - 'http://admin.giveus.site:8091'
+              - 'http://admin.giveus.site'
+              - 'http://giveus.site:8090'
+              - 'http://giveus.site:8091'
+              - 'http://giveus.site'
+              - 'http://giveus.site:8081'
+              - 'https://giveus.site'
+              - 'https://giveus.site:443'
+              - 'https://giveus.site:8090'
+              - 'http://172.17.0.11:8081'
+              - 'http://172.17.0.11:8091'
+              - 'http://172.17.0.11:8086'
+              - 'http://172.17.0.11'
+            allow-credentials: true # JWT 나 쿠키를 사용해 메시지를 보내야 할 경우 true
+            allowedHeaders: '*'
+            allowedMethods: # 메서드를 명시하지 않으면 안되는 경우도 있기 때문에 메서드는 명시해주는 편이 좋다고 한다.
+              - PUT
+              - GET
+              - POST
+              - PATCH
+              - DELETE
+              - OPTIONS
+      routes:
+        - id: backend-auth
+          uri: lb://BACKEND-AUTH
+          predicates:
+            - Path=/api/v1/auth/**, /api/v1/member/**, /login/oauth2/code/**, /oauth2/authorization/**
+        - id: backend-funding
+          uri: lb://BACKEND-FUNDING
+          predicates:
+            - Path=/api/v1/funding/**, /api/v2/funding/**, /api/v1/review/**, /api/funding/**
+        - id: backend-admin
+          uri: lb://BACKEND-ADMIN
+          predicates:
+            - Path=/api/v1/admin/**, /admin/login/oauth2/code/**, /admin/oauth2/authorization/**
+        - id: backend-payment
+          uri: lb://BACKEND-PAYMENT
+          predicates:
+            - Path=/api/v1/payment/**
+        - id: backend-notification
+          uri: lb://BACKEND-NOTIFICATION
+          predicates:
+            - Path=/api/v1/notification/**
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+jwt:
+  secret: dyAeHubOOc8KaOfYB6XEQoEj1QzRlVgtjNL8PYs1A1tymZvvqkcEU7L1imkKHeDa
+
+springdoc:
+  swagger-ui:
+    path: /api/docs
+    config-url: /v3/api-docs/swagger-config
+    tags-sorter: alpha
+    doc-expansion: none
+    urls:
+      - url: /api/v1/auth/docs
+        name: Auth
+      - url: /api/funding/docs
+        name: Funding
+      - url: /api/v1/admin/docs
+        name: Admin
+      - url: /api/v1/payment/docs
+        name: Payment
+      - url: /api/v1/notification/docs
+        name: Notification
+    filter: true
+
