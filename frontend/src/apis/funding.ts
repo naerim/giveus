@@ -43,7 +43,10 @@ export const searchFunding = async (query: string) => {
 export const fetchRecentParticipants = async () => {
   return publicRequest
     .get(`${url}/participants?limit=3`)
-    .then(res => res.data.data)
+    .then(res => {
+      console.log(res)
+      return res.data
+    })
     .catch(err => err)
 }
 

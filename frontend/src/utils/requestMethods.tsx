@@ -4,7 +4,7 @@ import axios from 'axios'
 export const BASE_URL = 'https://giveus.site'
 
 export const publicRequest = axios.create({
-  baseURL: BASE_URL,
+  baseURL: 'http://localhost:5173',
 })
 
 export const authRequest = axios.create({

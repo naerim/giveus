@@ -22,7 +22,7 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'public/mockServiceWorker.js'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -34,6 +34,10 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'prettier/prettier': 'error',
+    'import/extensions': 'off',
+    'consistent-return': 'off',
+    'import/no-extraneous-dependencies': "off",
+    "mport/prefer-default-export": "off",
     'react/function-component-definition': [
       'error',
       {

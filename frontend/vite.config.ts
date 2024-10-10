@@ -13,7 +13,7 @@ export default (mode: string) => {
       tsConfigPath(),
       VitePWA({
         registerType: 'autoUpdate',
-        devOptions: { enabled: true },
+        devOptions: { enabled: false },
         manifest: {
           name: 'GIVEUS',
           short_name: 'GIVEUS',
@@ -56,9 +56,9 @@ export default (mode: string) => {
       },
     },
     server: {
-      port: 3000,
-      host: true,
-      origin: 'http://0.0.0.0',
+      port: 5173,
+      host: 'localhost',
+      origin: 'http://localhost:5173',
       hmr: {
         host: 'localhost',
       },
