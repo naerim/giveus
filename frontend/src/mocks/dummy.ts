@@ -1,4 +1,4 @@
-import { RecentParticipantType } from '@types/fundingType.ts'
+import { RecentParticipantType } from '@/types/fundingType.ts'
 
 export const contributors: RecentParticipantType[] = [
   {
@@ -9,30 +9,11 @@ export const contributors: RecentParticipantType[] = [
     isPublic: false,
     imageUrl: 'string',
   },
-]
-
-export const contributors1: RecentParticipantType[] = [
-  {
-    memberFundingNo: 0,
-    name: 'test1',
-    amount: 10000,
-    createdAt: '2022-12-12',
-    isPublic: false,
-    imageUrl: 'string',
-  },
-  {
-    memberFundingNo: 1,
-    name: 'test1',
-    amount: 10000,
-    createdAt: '2022-12-12',
-    isPublic: false,
-    imageUrl: 'string',
-  },
   {
     memberFundingNo: 2,
-    name: 'test1',
+    name: 'test2',
     amount: 10000,
-    createdAt: '2022-12-12',
+    createdAt: '2024-12-12',
     isPublic: false,
     imageUrl: 'string',
   },
