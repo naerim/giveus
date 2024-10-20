@@ -15,8 +15,8 @@ export const Container = styled.div<{ $theme: number }>`
     position: absolute;
     bottom: 26px;
     right: 16px;
-    width: 39px;
-    height: 35px;
+    width: 34px;
+    height: 30px;
     @media only screen and (max-width: 379px) {
       bottom: 56px;
     }
@@ -33,6 +33,6 @@ export const Title = styled.div`
 export const Desc = styled.div<{ $theme: number }>`
   color: ${props => (props.$theme ? colors.gray05 : colors.gray03)};
   font-weight: 500;
-  font-size: 0.9em;
+  font-size: 0.85em;
   margin-top: 13px;
 `

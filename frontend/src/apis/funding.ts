@@ -1,5 +1,5 @@
 import { authRequest, publicRequest } from '@utils/requestMethods'
-import { RecentParticipantType } from '@/types/fundingType'
+import { FundingType, RecentParticipantType } from '@/types/fundingType'
 
 const url = '/api/v1/funding'
 
@@ -51,16 +51,16 @@ export const fetchRecentParticipants = async () => {
 // 누적 기부 금액 조회
 export const fetchTotalDonateAmount = async () => {
   return publicRequest
-    .get(`${url}/total-amount`)
-    .then(res => res.data.data)
+    .get<{ totalAmount: number }>(`${url}/total-amount`)
+    .then(res => res.data)
     .catch(err => err)
 }
 
 // 종료일이 얼마 남지 않은 펀딩 전체 목록 조회
 export const fetchSoonOver = async () => {
   return publicRequest
-    .get(`${url}/soon-over?limit=3`)
-    .then(res => res.data.data)
+    .get<FundingType[]>(`${url}/soon-over?limit=3`)
+    .then(res => res.data)
     .catch(err => err)
 }
 
