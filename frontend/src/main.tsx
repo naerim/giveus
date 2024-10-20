@@ -12,9 +12,9 @@ import App from './App'
 //   console.error = function () {}
 
 async function enableMocking() {
-  if (!import.meta.env.DEV) {
-    return
-  }
+  // if (!import.meta.env.DEV) {
+  //   return
+  // }
   const { worker } = await import('./mocks/browser.ts')
   return worker.start({
     onUnhandledRequest: (request, print) => {
