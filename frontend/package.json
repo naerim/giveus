@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && msw init ./build --save",
     "preview": "vite preview",
     "postinstall": "husky install",
     "format": "prettier --cache --write .",
@@ -60,5 +60,10 @@
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.12.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "build"
+    ]
   }
 }
