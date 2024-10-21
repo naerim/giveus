@@ -5,7 +5,7 @@ const url = '/api/v1/funding'
 
 // 펀딩 목록 조회
 export const fetchFundingList = async () => {
-  return authRequest.get(`${url}`).then(res => res.data.data)
+  return publicRequest.get<FundingType[]>(`${url}`).then(res => res.data)
 }
 
 // 펀딩 상세 조회

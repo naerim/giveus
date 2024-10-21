@@ -18,6 +18,7 @@ import { fetchFundingList } from '@/apis/funding'
 import FundingListBox from '@/components/funding/FundingListCard/FundingListBox'
 import * as f from '@pages/funding/FundingPage.styled'
 import Seo from '@/common/Seo'
+import { FundingType } from '@/types/fundingType.ts'
 
 const FundingPage = () => {
   const setFunding = useSetRecoilState(fundingState)
@@ -25,7 +26,7 @@ const FundingPage = () => {
   const [sortOpen, setSortrOpen] = useState<boolean>(false) // 정렬 모달
   const filteredFunding = useRecoilValue(filteredFundingState)
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<FundingType[]>({
     queryKey: ['FundingList'],
     queryFn: () => fetchFundingList(),
   })
@@ -36,10 +37,7 @@ const FundingPage = () => {
 
   return (
     <>
-      <Seo
-        title="GIVEUS"
-        description="여러분의 따뜻한 기부를 기다립니다"
-      />
+      <Seo title="GIVEUS" description="여러분의 따뜻한 기부를 기다립니다" />
       <Layout>
         <HomeHeader />
         <FundingListBox>
@@ -60,7 +58,7 @@ const FundingPage = () => {
 
       {filterOpen && (
         <Modal
-          name={'필터'}
+          name="필터"
           children={<FilterCondition setFilterOpen={setFilterOpen} />}
           onClose={() => setFilterOpen(false)}
         />
@@ -68,7 +66,7 @@ const FundingPage = () => {
 
       {sortOpen && (
         <ResponsiveModal
-          name={'정렬'}
+          name="정렬"
           children={<SortCondition />}
           onClose={() => setSortrOpen(false)}
         />

@@ -1,5 +1,10 @@
 import { http, HttpResponse } from 'msw'
-import { contributors, homeReviews, soonOverFunding } from '@mocks/dummy.ts'
+import {
+  contributors,
+  homeReviews,
+  soonOverFundings,
+  fundings,
+} from '@mocks/dummy.ts'
 
 export const handlers = [
   http.get('/api/v1/funding/participants', () => {
@@ -12,6 +17,9 @@ export const handlers = [
     return HttpResponse.json(homeReviews)
   }),
   http.get('/api/v1/funding/soon-over?limit=3', () => {
-    return HttpResponse.json(soonOverFunding)
+    return HttpResponse.json(soonOverFundings)
+  }),
+  http.get('/api/v1/funding', () => {
+    return HttpResponse.json(fundings)
   }),
 ]
