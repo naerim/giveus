@@ -32,7 +32,7 @@ const FundingPage = () => {
   })
 
   useEffect(() => {
-    !isLoading && setFunding(data)
+    data && !isLoading && setFunding(data)
   }, [data, isLoading])
 
   return (
